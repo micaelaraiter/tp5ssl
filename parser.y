@@ -1,7 +1,7 @@
 %code top{
 #include <stdio.h>
 #include "scanner.h" // se tiene que relacionar con scanner.l
-#include "sematic.h"
+#include "semantic.h"
 }
 
 %code provides {
@@ -40,10 +40,7 @@ extern char yyerrorBuffer[255];
 
 %%
 
-programa               : PROGRAMA { comenzar(); } listaDeclaraciones listaSentencias FIN { terminar(); if (yynerrs || yylexerrs || yysemerrs) YYABORT;}
-listaDeclaraciones     : listaDeclaraciones declaracion
-                       | %empty
-                       ;
+programa               : PROGRAMA { comenzar(); } listaSentencias FIN { terminar(); if (yynerrs || yylexerrs || yysemerrs) YYABORT;}
 listaSentencias        : listaSentencias sentencia
                        | sentencia
                        ;
@@ -59,7 +56,7 @@ escritura		: ESCRIBIR '(' listaExpresiones ')' ';'
 			; 
 lectura 		: LEER '(' listaIdentificadores ')' ';' 
 			;
-asignacion		: ID ASIGNACION expresion ';' 	        { asignar($1.regExp, $3.regExp); }
+asignacion		: ID ASIGNACION expresion ';' 	        { asignar($3.regExp, $1.lexema); }
 			;			
 listaExpresiones       : listaExpresiones ',' expresion                { escribir($3.regExp); }
                        | expresion                                    { escribir($1.regExp); }

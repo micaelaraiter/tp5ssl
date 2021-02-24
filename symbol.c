@@ -39,10 +39,4 @@ struct datoTS* nuevoDatoTS(char* identificador, TOKEN token) {
     return dato;
 }
 
-void inorden(struct datoTS* raiz) {
-    if (raiz != NULL) {
-        inorden(raiz->izq);
-        printf("%s \n", raiz->identificador);
-        inorden(raiz->der);
-    }
-}
+

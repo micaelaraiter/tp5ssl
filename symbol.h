@@ -1,7 +1,7 @@
 #ifndef SYMBOL_H_INCLUDED
 #define SYMBOL_H_INCLUDED
 
-#include "sematic.h"
+#include "semantic.h"
 
 struct datoTS {
     char            identificador[32];
